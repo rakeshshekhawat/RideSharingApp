@@ -13,23 +13,36 @@ public class Ride {
 	private double fare;
 	private RideStatus status;
 
-	public Ride(Passenger passenger, Driver driver, double distance, FareStrategy fareStrategy, double fare,
+	public Ride(Passenger passenger, Driver driver, double distance, FareStrategy fareStrategy,
 			RideStatus status) {
 		super();
 		this.passenger = passenger;
 		this.driver = driver;
 		this.distance = distance;
 		this.fareStrategy = fareStrategy;
-		this.fare = fare;
-		this.status = RideStatus.Scheduled;
+		
 	}
+	public Ride(Passenger passenger, Driver driver, double distance, FareStrategy fareStrategy) {
+		super();
+		this.passenger = passenger;
+		this.driver = driver;
+		this.distance = distance;
+		this.fareStrategy = fareStrategy;
+		
+	}
+	
 
-	public double calcFare() {
-		return fareStrategy.calcFare(driver.getVehicle(), distance);
+	
+
+
+
+	public void calcFare() {
+		this.fare= fareStrategy.calcFare(driver.getVehicle(), distance);
 	}
 
 	public void updateStatus(RideStatus status) {
 		this.status = status;
+		notifyUsers(status);
 	}
 
 	private void notifyUsers(RideStatus status) {
@@ -37,4 +50,7 @@ public class Ride {
 		driver.notify("Ride Status " + status);
 	}
 
+	public double getFare() {
+		return fare;
+	}
 }

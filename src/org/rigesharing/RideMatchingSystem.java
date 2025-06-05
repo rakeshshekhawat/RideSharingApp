@@ -8,13 +8,21 @@ public class RideMatchingSystem {
 		availableDrivers.add(driver);
 	}
 
-	public void requestRide(Passenger passenger,double distance) {
+	public void requestRide(Passenger passenger,double distance,FareStrategy fareStrategy) {
 		if(availableDrivers.isEmpty()) {
 			passenger.notify("No Drivers are available");
 			return;
 		}
 		Driver nearestDriver = findNearestDriver(passenger.location);
-		passenger.notify("Ride Scheduled Successfully");
+		availableDrivers.remove(nearestDriver);
+		Ride ride = new Ride( passenger,nearestDriver,distance,fareStrategy);
+		//passenger.notify("Ride Scheduled Successfully");
+		ride.calcFare();
+		passenger.notify("Your Fare is "+ ride.getFare());
+		ride.updateStatus(RideStatus.Ongoing);
+		
+		ride.updateStatus(RideStatus.Completed);
+		availableDrivers.add(nearestDriver);
 		return ;
 	}
 	
@@ -34,4 +42,6 @@ public class RideMatchingSystem {
 		}
 		return null;
 	}
+	
+	
 }
