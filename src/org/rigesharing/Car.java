@@ -10,7 +10,7 @@ public class Car extends Vehicle{
 	@Override
 	public double getFarePerKm() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 20;
 	}
 
 }

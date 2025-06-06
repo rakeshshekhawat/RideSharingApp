@@ -46,7 +46,7 @@ public class Ride {
 	}
 
 	private void notifyUsers(RideStatus status) {
-		passenger.notify("Your Ride is " + status);
+		passenger.notify("Your Ride is Rs" + status);
 		driver.notify("Ride Status " + status);
 	}
 
