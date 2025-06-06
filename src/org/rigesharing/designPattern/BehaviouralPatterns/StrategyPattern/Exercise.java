@@ -11,12 +11,11 @@ public class Exercise {
         
         Scanner sc = new Scanner(System.in);
         Document document = new Document();
-        
+        document.setFormatter(new PlainTextFormatter());
         String userInput = sc.nextLine();
         document.setContent(userInput);
 
         // Using PlainTextFormatter
-        // TODO: Set the formatter for the document to PlainTextFormatter.
         
         
         System.out.println("Plain Text:");
@@ -38,6 +37,12 @@ public class Exercise {
         
         sc.close();
     }
+    public static void main (String args[]) {
+    	Document doc = new Document();
+    	Exercise exercise = new Exercise();
+    	exercise.run();
+    	
+    }
 }
 
 interface formatter{
@@ -47,7 +52,7 @@ interface formatter{
 }
 class Document{
     formatter formatter;
-    public void Service(formatter formatter){
+    public void setFormatter(formatter formatter){
         this.formatter=formatter;
     }
     
